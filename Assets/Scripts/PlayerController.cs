@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public GameObject[] tailsFireSecondLine;
     public GameObject[] tailsFireThirdLine;
 
+    private float fireRepeatRate = 0.4f;
 
     void Start()
     {
@@ -78,15 +79,15 @@ public class PlayerController : MonoBehaviour
     IEnumerator SlowFire(int fireNumber)
     {
         tailsFireFirstLine[fireNumber].SetActive(true);
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(fireRepeatRate);
         tailsFireFirstLine[fireNumber].SetActive(false);
 
         tailsFireSecondLine[fireNumber].SetActive(true);
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(fireRepeatRate);
         tailsFireSecondLine[fireNumber].SetActive(false);
 
         tailsFireThirdLine[fireNumber].SetActive(true);
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(fireRepeatRate);
         tailsFireThirdLine[fireNumber].SetActive(false);
     }
 }

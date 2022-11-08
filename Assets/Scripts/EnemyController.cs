@@ -8,10 +8,12 @@ public class EnemyController : MonoBehaviour
     public GameObject[] enemyFirstLine;
     public GameObject[] enemySecondLine;
     public GameObject[] enemyThirdLine;
+    private float repeatRateCall = 2.6f;
+    private float repeatRateSlow = 0.8f;
 
     private void Start()
     {
-        InvokeRepeating("RandomEnemyMovement", 0f, 2.5f);
+        StartCoroutine(CallEnemy());
     }
 
     private void RandomEnemyMovement()
@@ -20,7 +22,6 @@ public class EnemyController : MonoBehaviour
         int randomSecondEnemy = Random.Range(0, enemySecondLine.Length);
         int randomThirdEnemy = Random.Range(0, enemyThirdLine.Length);
 
-        
         if (enemyFirstLine[randomFirstEnemy].activeSelf)
         {
             StartCoroutine(SlowEnemyMovement(randomFirstEnemy));
@@ -38,15 +39,24 @@ public class EnemyController : MonoBehaviour
     IEnumerator SlowEnemyMovement(int enemyNumber)
     {
         enemyFirstLine[enemyNumber].SetActive(true);
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(repeatRateSlow);
         enemyFirstLine[enemyNumber].SetActive(false);
 
         enemySecondLine[enemyNumber].SetActive(true);
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(repeatRateSlow);
         enemySecondLine[enemyNumber].SetActive(false);
 
         enemyThirdLine[enemyNumber].SetActive(true);
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(repeatRateSlow);
         enemyThirdLine[enemyNumber].SetActive(false);
+    }
+
+    IEnumerator CallEnemy()
+    {
+        while (true)
+        {
+            RandomEnemyMovement();
+            yield return new WaitForSeconds(repeatRateCall);
+        }
     }
 }
