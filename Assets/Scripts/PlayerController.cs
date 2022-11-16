@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         tailsCenter.SetActive(true);
+        GameManager.Instance.playerIndex = 1;
     }
 
     void Update()
@@ -34,11 +35,13 @@ public class PlayerController : MonoBehaviour
             {
                 tailsCenter.SetActive(false);
                 tailsRight.SetActive(true);
+                GameManager.Instance.playerIndex = 2;
             }
             else if (tailsLeft.activeSelf)
             {
                 tailsLeft.SetActive(false);
                 tailsCenter.SetActive(true);
+                GameManager.Instance.playerIndex = 1; 
             }
         }
 
@@ -48,11 +51,13 @@ public class PlayerController : MonoBehaviour
             {
                 tailsLeft.SetActive(true);
                 tailsCenter.SetActive(false);
+                GameManager.Instance.playerIndex = 0;
             }
             else if(tailsRight.activeSelf)
             {
                 tailsRight.SetActive(false);
                 tailsCenter.SetActive(true);
+                GameManager.Instance.playerIndex = 1;
             }
         }
     }

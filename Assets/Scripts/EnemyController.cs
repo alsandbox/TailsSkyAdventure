@@ -33,6 +33,7 @@ public class EnemyController : MonoBehaviour
         else
         {
             StartCoroutine(SlowEnemyMovement(randomThirdEnemy));
+            GameManager.Instance.enemyIndex = randomThirdEnemy;
         }
     }
 
@@ -48,6 +49,7 @@ public class EnemyController : MonoBehaviour
 
         enemyThirdLine[enemyNumber].SetActive(true);
         yield return new WaitForSeconds(repeatRateSlow);
+        GameManager.Instance.EnemyHitsPlayer();
         enemyThirdLine[enemyNumber].SetActive(false);
     }
 
