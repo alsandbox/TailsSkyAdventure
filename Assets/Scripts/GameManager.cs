@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     private int fireIndex;
     public int playerIndex;
     public int lives;
+    private int passedShips = 5;
     public UnityEvent livesEvent;
 
     private void Awake()
@@ -48,6 +49,20 @@ public class GameManager : MonoBehaviour
         else
         {
 
+        }
+    }
+
+    public void PlayerMissesEnemy()
+    {
+        if (enemyIndex != playerIndex & lives != 0)
+        {
+            passedShips--;
+
+            if (passedShips == 0)
+            {
+                lives--;
+                livesEvent.Invoke();
+            }
         }
     }
 }
