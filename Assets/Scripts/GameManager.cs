@@ -7,12 +7,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public int enemyIndex;
-    private int fireIndex;
     public int playerIndex;
     public int lives;
-    private int passedShips = 5;
+    public int passedShips;
     public UnityEvent livesEvent;
+    public bool enemyDestroyed;
 
     private void Awake()
     {
@@ -26,35 +25,21 @@ public class GameManager : MonoBehaviour
 
         lives = 3;
         playerIndex = 0;
-        enemyIndex = 0;
+        passedShips = 5;
     }
 
-    void Start()
+    public void EnemyHitsPlayer(int enemyNumber)
     {
-
-    }
-
-    void Update()
-    {
-        
-    }
-
-    public void EnemyHitsPlayer()
-    {
-        if (enemyIndex == playerIndex & lives != 0)
+        if (enemyNumber == playerIndex & lives != 0 & !enemyDestroyed)
         {
             lives--;
             livesEvent.Invoke();
         }
-        else
-        {
-
-        }
     }
 
-    public void PlayerMissesEnemy()
+    public void PlayerMissesEnemy(int enemyNumber)
     {
-        if (enemyIndex != playerIndex & lives != 0)
+        if (enemyNumber != playerIndex & lives != 0 & passedShips > 0)
         {
             passedShips--;
 

@@ -81,18 +81,29 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
     IEnumerator SlowFire(int fireNumber)
     {
         tailsFireFirstLine[fireNumber].SetActive(true);
         yield return new WaitForSeconds(fireRepeatRate);
         tailsFireFirstLine[fireNumber].SetActive(false);
 
-        tailsFireSecondLine[fireNumber].SetActive(true);
-        yield return new WaitForSeconds(fireRepeatRate);
-        tailsFireSecondLine[fireNumber].SetActive(false);
+        if (!GameManager.Instance.enemyDestroyed)
+        {
+            tailsFireSecondLine[fireNumber].SetActive(true);
+            yield return new WaitForSeconds(fireRepeatRate);
+            tailsFireSecondLine[fireNumber].SetActive(false);
+        }
+        else
+        {
+            yield break;
+        }
 
-        tailsFireThirdLine[fireNumber].SetActive(true);
-        yield return new WaitForSeconds(fireRepeatRate);
-        tailsFireThirdLine[fireNumber].SetActive(false);
+        if (!GameManager.Instance.enemyDestroyed)
+        {
+            tailsFireThirdLine[fireNumber].SetActive(true);
+            yield return new WaitForSeconds(fireRepeatRate);
+            tailsFireThirdLine[fireNumber].SetActive(false);
+        }
     }
 }
