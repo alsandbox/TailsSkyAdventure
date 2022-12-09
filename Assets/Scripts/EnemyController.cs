@@ -8,9 +8,11 @@ public class EnemyController : MonoBehaviour
     public GameObject[] enemyFirstLine;
     public GameObject[] enemySecondLine;
     public GameObject[] enemyThirdLine;
+    public GameObject[] enemyFourthLine;
 
     private float repeatRateCall = 2.6f;
     private float repeatRateSlow = 0.8f;
+    private float timeDelayInvisibleEnemy = 0.4f;
 
     private void Start()
     {
@@ -58,9 +60,19 @@ public class EnemyController : MonoBehaviour
         {
             enemyThirdLine[enemyNumber].SetActive(true);
             yield return new WaitForSeconds(repeatRateSlow);
-            GameManager.Instance.EnemyHitsPlayer(enemyNumber);
             GameManager.Instance.PlayerMissesEnemy(enemyNumber);
             enemyThirdLine[enemyNumber].SetActive(false);
+        }
+        else
+        {
+            yield break;
+        }
+
+        if (!GameManager.Instance.enemyDestroyed)
+        {
+            enemyFourthLine[enemyNumber].SetActive(true);
+            yield return new WaitForSeconds(timeDelayInvisibleEnemy);
+            enemyFourthLine[enemyNumber].SetActive(false);
         }
     }
 

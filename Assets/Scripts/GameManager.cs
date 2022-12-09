@@ -28,9 +28,9 @@ public class GameManager : MonoBehaviour
         passedShips = 5;
     }
 
-    public void EnemyHitsPlayer(int enemyNumber)
+    public void EnemyHitsPlayer()
     {
-        if (enemyNumber == playerIndex & lives != 0 & !enemyDestroyed)
+        if (lives != 0 & !enemyDestroyed)
         {
             lives--;
             livesEvent.Invoke();
