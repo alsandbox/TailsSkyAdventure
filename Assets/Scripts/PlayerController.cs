@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public GameObject[] tailsFireSecondLine;
     public GameObject[] tailsFireThirdLine;
 
-    private float fireRepeatRate = 0.4f;
+    private float fireRepeatRate = 0.3f;
 
     void Start()
     {
@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerShoot()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             if (tailsCenter.activeSelf)
             {
