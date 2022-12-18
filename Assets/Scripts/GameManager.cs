@@ -11,7 +11,10 @@ public class GameManager : MonoBehaviour
     public int lives;
     public int passedShips;
     public UnityEvent livesEvent;
+    public GameObject disablePlayer;
     public bool enemyDestroyed;
+    public bool isGameOver;
+    public GameObject gameOverScreen;
 
     private void Awake()
     {
@@ -30,16 +33,22 @@ public class GameManager : MonoBehaviour
 
     public void EnemyHitsPlayer()
     {
-        if (lives != 0 & !enemyDestroyed)
-        {
+        if (lives > 0 & !enemyDestroyed)
+        { 
             lives--;
             livesEvent.Invoke();
+        }
+        
+        if(lives == 0)
+        {
+            isGameOver = true;
+            GameOver();
         }
     }
 
     public void PlayerMissesEnemy(int enemyNumber)
     {
-        if (enemyNumber != playerIndex & lives != 0 & passedShips > 0)
+        if (enemyNumber != playerIndex & lives > 0 & passedShips > 0)
         {
             passedShips--;
 
@@ -50,5 +59,16 @@ public class GameManager : MonoBehaviour
                 passedShips = 5;
             }
         }
+        else if (lives== 0)
+        {
+            isGameOver = true;
+            GameOver();
+        }
+    }
+
+    public void GameOver()
+    {
+        disablePlayer.SetActive(false);
+        gameOverScreen.SetActive(true);
     }
 }
