@@ -23,8 +23,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        PlayerMove();
-        PlayerShoot();
+        if (!GameManager.Instance.isGameOver)
+        {
+            PlayerMove();
+            PlayerShoot();
+        }
     }
 
     private void PlayerMove()
@@ -80,7 +83,6 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
 
     IEnumerator SlowFire(int fireNumber)
     {
