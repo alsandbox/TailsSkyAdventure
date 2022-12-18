@@ -10,13 +10,12 @@ public class EnemyController : MonoBehaviour
     public GameObject[] enemyThirdLine;
     public GameObject[] enemyFourthLine;
 
-    private float repeatRateCall = 2.6f;
-    private float repeatRateSlow = 0.8f;
+    private float repeatRateSlow = 0.6f;
     private float timeDelayInvisibleEnemy = 0.4f;
 
     private void Start()
     {
-        StartCoroutine(CallEnemy());
+        EnemyCall();
     }
 
     private void RandomEnemyMovement()
@@ -51,10 +50,6 @@ public class EnemyController : MonoBehaviour
             yield return new WaitForSeconds(repeatRateSlow);
             enemySecondLine[enemyNumber].SetActive(false);
         }
-        else
-        {
-            yield break;
-        }
 
         if (!GameManager.Instance.enemyDestroyed)
         {
@@ -63,26 +58,24 @@ public class EnemyController : MonoBehaviour
             GameManager.Instance.PlayerMissesEnemy(enemyNumber);
             enemyThirdLine[enemyNumber].SetActive(false);
         }
-        else
-        {
-            yield break;
-        }
 
-        if (!GameManager.Instance.enemyDestroyed)
+        if (!GameManager.Instance.enemyDestroyed & !GameManager.Instance.isGameOver)
         {
             enemyFourthLine[enemyNumber].SetActive(true);
             yield return new WaitForSeconds(timeDelayInvisibleEnemy);
             enemyFourthLine[enemyNumber].SetActive(false);
         }
+
+        yield return new WaitForSeconds(repeatRateSlow);
+        EnemyCall();
     }
 
-    IEnumerator CallEnemy()
+    private void EnemyCall()
     {
-        while (true)
+        if (!GameManager.Instance.isGameOver)
         {
             GameManager.Instance.enemyDestroyed = false;
             RandomEnemyMovement();
-            yield return new WaitForSeconds(repeatRateCall);
         }
     }
 }
