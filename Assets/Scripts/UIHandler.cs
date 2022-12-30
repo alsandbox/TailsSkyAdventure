@@ -6,9 +6,9 @@ public class UIHandler : MonoBehaviour
 {
     public GameObject lifeUI;
     public GameObject flagsUI;
-    public int livesCounter = 0;
-    public int flagsCounter = 0;
-    
+    private int livesCounter = 0;
+    private int flagsCounter = 0;
+
     public void DecreaseLife()
     {
         GameObject currentLifeUI = lifeUI.transform.GetChild(livesCounter).gameObject;
