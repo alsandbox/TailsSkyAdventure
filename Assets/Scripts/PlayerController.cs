@@ -1,111 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
-    public GameObject tailsCenter;
-    public GameObject tailsLeft;
-    public GameObject tailsRight;
+    public static bool isGameOver;
+    protected int passedShips = 5;
+    protected int lives = 3;
 
-    //counting is done from the bottom
-    public GameObject[] tailsFireFirstLine;
-    public GameObject[] tailsFireSecondLine;
-    public GameObject[] tailsFireThirdLine;
+    public UnityEvent DecreaseLifeEvent;
 
-    private float fireRepeatRate = 0.3f;
-
-    void Start()
+    public void PlayerMissesEnemy() //called from the EnemyController
     {
-        tailsCenter.SetActive(true);
-        GameManager.Instance.playerIndex = 1;
-    }
 
-    void Update()
-    {
-        if (!GameManager.Instance.isGameOver)
+        if (lives > 0 & passedShips > 0)
         {
-            PlayerMove();
-            PlayerShoot();
-        }
-    }
+            passedShips--;
 
-    private void PlayerMove()
-    {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            if (tailsCenter.activeSelf)
+            if (passedShips == 0)
             {
-                tailsCenter.SetActive(false);
-                tailsRight.SetActive(true);
-                GameManager.Instance.playerIndex = 2;
-            }
-            else if (tailsLeft.activeSelf)
-            {
-                tailsLeft.SetActive(false);
-                tailsCenter.SetActive(true);
-                GameManager.Instance.playerIndex = 1; 
+                lives--;
+                DecreaseLifeEvent?.Invoke(); 
+                passedShips = 5;
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.A))
+        else if (lives == 0)
         {
-            if (tailsCenter.activeSelf)
-            {
-                tailsLeft.SetActive(true);
-                tailsCenter.SetActive(false);
-                GameManager.Instance.playerIndex = 0;
-            }
-            else if(tailsRight.activeSelf)
-            {
-                tailsRight.SetActive(false);
-                tailsCenter.SetActive(true);
-                GameManager.Instance.playerIndex = 1;
-            }
+            isGameOver = true;
+            GameOver();
         }
     }
 
-    private void PlayerShoot()
+    protected void EnemyHitsPlayer()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (lives > 0)
         {
-            if (tailsCenter.activeSelf)
-            {
-                StartCoroutine(SlowFire(1));
-            }
-            else if (tailsRight.activeSelf)
-            {
-                StartCoroutine(SlowFire(2));
-            }
-            else
-            {
-                StartCoroutine(SlowFire(0));
-            }
-        }
-    }
-
-    IEnumerator SlowFire(int fireNumber)
-    {
-        tailsFireFirstLine[fireNumber].SetActive(true);
-        yield return new WaitForSeconds(fireRepeatRate);
-        tailsFireFirstLine[fireNumber].SetActive(false);
-
-        if (!GameManager.Instance.enemyDestroyed)
-        {
-            tailsFireSecondLine[fireNumber].SetActive(true);
-            yield return new WaitForSeconds(fireRepeatRate);
-            tailsFireSecondLine[fireNumber].SetActive(false);
-        }
-        else
-        {
-            yield break;
+            lives--;
+            DecreaseLifeEvent?.Invoke();
         }
 
-        if (!GameManager.Instance.enemyDestroyed)
+        else if (lives == 0)
         {
-            tailsFireThirdLine[fireNumber].SetActive(true);
-            yield return new WaitForSeconds(fireRepeatRate);
-            tailsFireThirdLine[fireNumber].SetActive(false);
+            isGameOver = true;
+            GameOver();
         }
     }
 }
