@@ -12,6 +12,15 @@ public class EnemyController : MonoBehaviour
 
     private float repeatRateSlow = 0.6f;
     private float timeDelayInvisibleEnemy = 0.4f;
+    private bool isEnemyDestroyed;
+
+
+    public bool IsDestroyed
+    {
+        get { return isEnemyDestroyed; }
+        set { isEnemyDestroyed = value; }
+    }
+
 
     private void Start()
     {
@@ -44,14 +53,14 @@ public class EnemyController : MonoBehaviour
         yield return new WaitForSeconds(repeatRateSlow);
         enemyFirstLine[enemyNumber].SetActive(false);
 
-        if (!GameManager.Instance.enemyDestroyed)
+        if (!IsDestroyed)
         {
             enemySecondLine[enemyNumber].SetActive(true);
             yield return new WaitForSeconds(repeatRateSlow);
             enemySecondLine[enemyNumber].SetActive(false);
         }
 
-        if (!GameManager.Instance.enemyDestroyed)
+        if (!IsDestroyed)
         {
             enemyThirdLine[enemyNumber].SetActive(true);
             yield return new WaitForSeconds(repeatRateSlow);
@@ -59,7 +68,7 @@ public class EnemyController : MonoBehaviour
             enemyThirdLine[enemyNumber].SetActive(false);
         }
 
-        if (!GameManager.Instance.enemyDestroyed & !GameManager.Instance.isGameOver)
+        if (!IsDestroyed & !PlayerController.isGameOver)
         {
             enemyFourthLine[enemyNumber].SetActive(true);
             yield return new WaitForSeconds(timeDelayInvisibleEnemy);
@@ -74,7 +83,7 @@ public class EnemyController : MonoBehaviour
     {
         if (!GameManager.Instance.isGameOver)
         {
-            GameManager.Instance.enemyDestroyed = false;
+            IsDestroyed = false;
             RandomEnemyMovement();
         }
     }
