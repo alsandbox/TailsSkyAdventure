@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyController : MonoBehaviour
 {
@@ -21,6 +21,7 @@ public class EnemyController : MonoBehaviour
         set { isEnemyDestroyed = value; }
     }
 
+    public UnityEvent EnemyIsMissing;
 
     private void Start()
     {
@@ -64,12 +65,12 @@ public class EnemyController : MonoBehaviour
         {
             enemyThirdLine[enemyNumber].SetActive(true);
             yield return new WaitForSeconds(repeatRateSlow);
-            GameManager.Instance.PlayerMissesEnemy(enemyNumber);
             enemyThirdLine[enemyNumber].SetActive(false);
         }
 
         if (!IsDestroyed & !PlayerController.isGameOver)
         {
+            EnemyIsMissing?.Invoke(); //from PlayerActing
             enemyFourthLine[enemyNumber].SetActive(true);
             yield return new WaitForSeconds(timeDelayInvisibleEnemy);
             enemyFourthLine[enemyNumber].SetActive(false);
