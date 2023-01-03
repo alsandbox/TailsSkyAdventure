@@ -14,6 +14,7 @@ public class DestroyEnemy : MonoBehaviour
 
     public UnityEvent IncreaseFlagsEvent;
 
+    private AudioSource destroyEnemySound;
 
     public EnemyController enemyController;
 
@@ -21,11 +22,13 @@ public class DestroyEnemy : MonoBehaviour
     {
         blink = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        destroyEnemySound = GetComponent<AudioSource>();
         enemyController = enemyController.GetComponent<EnemyController>();
     }
 
     private void OnTriggerEnter2D(Collider2D fire)
     {
+        destroyEnemySound.Play();
         enemyController.IsDestroyed = true;
         blink.SetTrigger("getsHit");
         

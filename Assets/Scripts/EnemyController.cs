@@ -14,6 +14,7 @@ public class EnemyController : MonoBehaviour
     private float timeDelayInvisibleEnemy = 0.4f;
     private bool isEnemyDestroyed;
 
+    private AudioSource missedEnemy;
 
     public bool IsDestroyed
     {
@@ -26,6 +27,7 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         EnemyCall();
+        missedEnemy = GetComponent<AudioSource>();
     }
 
     private void RandomEnemyMovement()
@@ -71,6 +73,7 @@ public class EnemyController : MonoBehaviour
         if (!IsDestroyed & !PlayerController.isGameOver)
         {
             EnemyIsMissing?.Invoke(); //from PlayerActing
+            missedEnemy.Play();
             enemyFourthLine[enemyNumber].SetActive(true);
             yield return new WaitForSeconds(timeDelayInvisibleEnemy);
             enemyFourthLine[enemyNumber].SetActive(false);
