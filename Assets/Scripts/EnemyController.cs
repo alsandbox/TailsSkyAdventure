@@ -15,12 +15,7 @@ public class EnemyController : MonoBehaviour
     private bool isEnemyDestroyed;
 
     private AudioSource missedEnemy;
-
-    public bool IsDestroyed
-    {
-        get { return isEnemyDestroyed; }
-        set { isEnemyDestroyed = value; }
-    }
+    public bool IsDestroyed { get; set; }
 
     public UnityEvent EnemyIsMissing;
 
