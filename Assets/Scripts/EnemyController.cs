@@ -10,9 +10,8 @@ public class EnemyController : MonoBehaviour
     public GameObject[] enemyThirdLine;
     public GameObject[] enemyFourthLine;
 
-    private float repeatRateSlow = 0.6f;
-    private float timeDelayInvisibleEnemy = 0.4f;
-    private bool isEnemyDestroyed;
+    private readonly float repeatRateSlow = 0.6f;
+    private readonly float timeDelayInvisibleEnemy = 0.4f;
 
     private AudioSource missedEnemy;
     public bool IsDestroyed { get; set; }

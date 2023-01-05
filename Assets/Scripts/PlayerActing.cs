@@ -13,10 +13,10 @@ public class PlayerActing : PlayerController
     public GameObject[] tailsFireSecondLine;
     public GameObject[] tailsFireThirdLine;
 
-    private float fireRepeatRate = 0.3f;
+    private readonly float fireRepeatRate = 0.2f;
     public EnemyController enemyController;
 
-    AudioSource fireSound;
+    private AudioSource fireSound;
 
     void Start()
     {
