@@ -12,8 +12,6 @@ public class EnemyController : MonoBehaviour
 
     private readonly float repeatRateSlow = 0.6f;
     private readonly float timeDelayInvisibleEnemy = 0.4f;
-
-    private AudioSource missedEnemy;
     public bool IsDestroyed { get; set; }
 
     public UnityEvent EnemyIsMissing;
@@ -21,7 +19,6 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         EnemyCall();
-        missedEnemy = GetComponent<AudioSource>();
     }
 
     private void RandomEnemyMovement()

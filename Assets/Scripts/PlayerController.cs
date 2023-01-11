@@ -9,12 +9,15 @@ public class PlayerController : MonoBehaviour
 
     public UnityEvent DecreaseLifeEvent;
 
+    public AudioSource missedEnemy;
+
 
     public void PlayerMissesEnemy() //called from the EnemyController
     {
 
         if (lives > 0 & passedShips > 0)
         {
+            missedEnemy.Play();
             passedShips--;
             
             if (passedShips == 0)
