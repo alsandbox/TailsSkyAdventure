@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class PlayerDamage : PlayerController
 {
@@ -19,5 +16,10 @@ public class PlayerDamage : PlayerController
         blink.SetTrigger("getsHit");
         playersDamageSound.Play();
         EnemyHitsPlayer();
+
+        if (IsGameOver)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 }

@@ -67,7 +67,7 @@ public class EnemyController : MonoBehaviour
 
     private void EnemyCall()
     {
-        if (!GameManager.Instance.isGameOver)
+        if (!PlayerController.IsGameOver)
         {
             IsDestroyed = false;
             RandomEnemyMovement();
