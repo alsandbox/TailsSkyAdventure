@@ -30,49 +30,37 @@ public class EnemyController : MonoBehaviour
         int randomSecondEnemy = Random.Range(0, enemySecondLine.Length);
         int randomThirdEnemy = Random.Range(0, enemyThirdLine.Length);
 
-        if (enemyFirstLine[randomFirstEnemy].activeSelf)
-        {
-            StartCoroutine(SlowEnemyMovement(randomFirstEnemy));
-        }
-        else if (enemySecondLine[randomSecondEnemy].activeSelf)
-        {
-            StartCoroutine(SlowEnemyMovement(randomSecondEnemy));
-        }
-        else
-        {
-            StartCoroutine(SlowEnemyMovement(randomThirdEnemy));
-        }
+        StartCoroutine(SlowEnemyMovement(randomFirstEnemy, randomSecondEnemy, randomThirdEnemy));
     }
 
-    IEnumerator SlowEnemyMovement(int enemyNumber)
+    IEnumerator SlowEnemyMovement(int randomFirstNum, int randomSecondNum, int randomThirdNum)
     {
-        enemyFirstLine[enemyNumber].SetActive(true);
+        enemyFirstLine[randomFirstNum].SetActive(true);
         yield return new WaitForSeconds(repeatRateSlow);
-        enemyFirstLine[enemyNumber].SetActive(false);
+        enemyFirstLine[randomFirstNum].SetActive(false);
 
         if (!IsDestroyed)
         {
-            enemySecondLine[enemyNumber].SetActive(true);
+            enemySecondLine[randomSecondNum].SetActive(true);
             yield return new WaitForSeconds(repeatRateSlow);
-            enemySecondLine[enemyNumber].SetActive(false);
+            enemySecondLine[randomSecondNum].SetActive(false);
         }
 
         if (!IsDestroyed)
         {
-            enemyThirdLine[enemyNumber].SetActive(true);
+            enemyThirdLine[randomThirdNum].SetActive(true);
             yield return new WaitForSeconds(repeatRateSlow);
-            enemyThirdLine[enemyNumber].SetActive(false);
+            enemyThirdLine[randomThirdNum].SetActive(false);
         }
 
-        if (!IsDestroyed & !PlayerController.isGameOver)
+        if (!IsDestroyed)
         {
-            EnemyIsMissing?.Invoke(); //from PlayerActing
-            missedEnemy.Play();
-            enemyFourthLine[enemyNumber].SetActive(true);
+            enemyFourthLine[randomThirdNum].SetActive(true);
             yield return new WaitForSeconds(timeDelayInvisibleEnemy);
-            enemyFourthLine[enemyNumber].SetActive(false);
+            EnemyIsMissing?.Invoke(); //from PlayerController
+            enemyFourthLine[randomThirdNum].SetActive(false);
         }
-
+        
         yield return new WaitForSeconds(repeatRateSlow);
         EnemyCall();
     }
