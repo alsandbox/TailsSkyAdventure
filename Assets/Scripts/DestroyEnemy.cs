@@ -8,15 +8,16 @@ public class DestroyEnemy : MonoBehaviour
     private static int enemiesCounter = 0;
 
     private Animator blink;
-    private SpriteRenderer spriteRenderer;
 
-    public GameObject winScreenUI;
+    private SpriteRenderer spriteRenderer;
 
     public UnityEvent IncreaseFlagsEvent;
 
     private AudioSource destroyEnemySound;
 
     public EnemyController enemyController;
+
+    public GameObject WinScreenUI;
 
     private void Start()
     {
@@ -38,9 +39,10 @@ public class DestroyEnemy : MonoBehaviour
         {
             IncreaseFlagsEvent?.Invoke();
         }
-        else if(enemiesCounter == numberOfLevels * enemiesNextLevel)
+        else if (enemiesCounter == numberOfLevels * enemiesNextLevel)
         {
-            winScreenUI.SetActive(true);
+            PlayerController.IsGameOver = true;
+            WinScreenUI.SetActive(true);
         }
     }
 
