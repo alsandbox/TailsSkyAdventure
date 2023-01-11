@@ -24,10 +24,11 @@ public class PlayerController : MonoBehaviour
                 passedShips = 5;
             }
         }
-        else if (lives == 0)
+
+        if (lives == 0)
         {
-            isGameOver = true;
-            GameOver();
+            IsGameOver = true;
+            GameOverScreen.Invoke();
         }
     }
 
@@ -39,11 +40,10 @@ public class PlayerController : MonoBehaviour
             DecreaseLifeEvent?.Invoke();
         }
 
-        else if (lives == 0)
+        if (lives == 0)
         {
-            isGameOver = true;
-            GameOver();
             IsGameOver = true;
+            GameOverScreen.Invoke();
         }
     }
 }
