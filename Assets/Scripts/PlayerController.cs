@@ -1,15 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
-    public static bool isGameOver;
     protected int passedShips = 5;
     protected int lives = 3;
+    public static bool IsGameOver { get; set; }
 
     public UnityEvent DecreaseLifeEvent;
+
 
     public void PlayerMissesEnemy() //called from the EnemyController
     {
@@ -17,7 +16,7 @@ public class PlayerController : MonoBehaviour
         if (lives > 0 & passedShips > 0)
         {
             passedShips--;
-
+            
             if (passedShips == 0)
             {
                 lives--;
@@ -44,6 +43,7 @@ public class PlayerController : MonoBehaviour
         {
             isGameOver = true;
             GameOver();
+            IsGameOver = true;
         }
     }
 }
