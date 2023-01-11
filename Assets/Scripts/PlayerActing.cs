@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerActing : PlayerController 
+public class PlayerActing : PlayerController
 {
     public GameObject tailsCenter;
     public GameObject tailsLeft;
@@ -16,7 +16,9 @@ public class PlayerActing : PlayerController
     private readonly float fireRepeatRate = 0.2f;
     public EnemyController enemyController;
 
-    private AudioSource fireSound;
+    public AudioSource fireSound;
+
+    
 
     void Start()
     {
@@ -26,7 +28,7 @@ public class PlayerActing : PlayerController
 
     void Update()
     {
-        if (!isGameOver)
+        if (!IsGameOver)
         {
             PlayerMove();
             PlayerShoot();
@@ -68,10 +70,7 @@ public class PlayerActing : PlayerController
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            if (fireSound != null)
-            {
-                fireSound.Play();
-            }
+            fireSound.Play();
 
             if (tailsCenter.activeSelf)
             {
