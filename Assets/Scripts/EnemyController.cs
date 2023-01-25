@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour
     public GameObject[] enemyFourthLine;
 
     private readonly float repeatRateSlow = 0.6f;
-    private readonly float timeDelayInvisibleEnemy = 0.4f;
+    private readonly float timeDelayInvisibleEnemy = 0.15f;
     public bool IsDestroyed { get; set; }
 
     public UnityEvent EnemyIsMissing;
