@@ -24,7 +24,9 @@ public class UIHandler : MonoBehaviour
 
     public GameObject GameOverScreen;
     public GameObject WinScreen;
+
     public GameObject tails;
+    public GameObject fire;
 
     private GameObject buttonsGameOver;
     private GameObject buttonsWin;
@@ -65,6 +67,8 @@ public class UIHandler : MonoBehaviour
     public void GameOver()
     {
         GameOverScreen.SetActive(true);
+        tails.SetActive(false);
+        fire.SetActive(false);
         StartCoroutine(MusicDelay(gameOverDelay));
     }
 
@@ -72,6 +76,7 @@ public class UIHandler : MonoBehaviour
     {
         WinScreen.SetActive(true);
         tails.SetActive(false);
+        fire.SetActive(false);
         StartCoroutine(MusicDelay(winDelay));
     }
 
