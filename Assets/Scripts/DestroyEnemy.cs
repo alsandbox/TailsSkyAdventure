@@ -12,12 +12,11 @@ public class DestroyEnemy : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     public UnityEvent IncreaseFlagsEvent;
+    public UnityEvent WinScreenEvent;
 
     private AudioSource destroyEnemySound;
 
     public EnemyController enemyController;
-
-    public GameObject WinScreenUI;
 
     private void Start()
     {
@@ -42,7 +41,7 @@ public class DestroyEnemy : MonoBehaviour
         else if (enemiesCounter == numberOfLevels * enemiesNextLevel)
         {
             PlayerController.IsGameOver = true;
-            WinScreenUI.SetActive(true);
+            WinScreenEvent?.Invoke();
         }
     }
 

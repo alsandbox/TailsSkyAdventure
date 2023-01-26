@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
 
     public AudioSource missedEnemy;
 
+    public UnityEvent GameOverScreen;
 
     public void PlayerMissesEnemy() //called from the EnemyController
     {
