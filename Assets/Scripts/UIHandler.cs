@@ -20,7 +20,7 @@ public class UIHandler : MonoBehaviour
     private Animator winAnimator;
 
     private float gameOverDelay;
-    private float winDelay;
+    private float winDelay = 5f;
 
     public GameObject GameOverScreen;
     public GameObject WinScreen;
@@ -43,7 +43,6 @@ public class UIHandler : MonoBehaviour
         buttonsGameOver = GameOverScreen.transform.GetChild(GameOverScreen.transform.childCount - 1).gameObject;
 
         winAudioSource = WinScreen.GetComponent<AudioSource>();
-        winDelay = winAudioSource.clip.length;
         winAnimator = WinScreen.GetComponent<Animator>();
         buttonsWin = WinScreen.transform.GetChild(WinScreen.transform.childCount - 1).gameObject;
     }
