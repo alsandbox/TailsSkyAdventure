@@ -29,9 +29,9 @@ public class DestroyEnemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D fire)
     {
         destroyEnemySound.Play();
-        enemyController.IsDestroyed = true;
         blink.SetTrigger("getsHit");
-        
+        enemyController.IsDestroyed = true;
+
         enemiesCounter++;
 
         if (enemiesCounter % enemiesNextLevel == 0 & enemiesCounter < numberOfLevels * enemiesNextLevel)

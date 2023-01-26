@@ -90,9 +90,9 @@ public class UIHandler : MonoBehaviour
         #if UNITY_EDITOR
                 EditorApplication.ExitPlaymode();
         #elif (UNITY_WEBGL)
-                    Application.OpenURL("about:blank");
+                Application.OpenURL("about:blank");
         #else
-                    Application.Quit();
+                Application.Quit();
         #endif
     }
 

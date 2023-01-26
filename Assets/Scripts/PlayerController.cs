@@ -3,9 +3,9 @@ using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
-    protected int passedShips = 5;
-    protected int lives = 3;
     public static bool IsGameOver { get; set; }
+    protected int passedShips = 5;
+    protected static int lives = 3;
 
     public UnityEvent DecreaseLifeEvent;
 

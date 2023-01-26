@@ -18,8 +18,6 @@ public class PlayerActing : PlayerController
 
     public AudioSource fireSound;
 
-    
-
     void Start()
     {
         tailsCenter.SetActive(true);
