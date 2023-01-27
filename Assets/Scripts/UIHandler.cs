@@ -36,6 +36,8 @@ public class UIHandler : MonoBehaviour
     private void Start()
     {
         sceneID = SceneManager.GetActiveScene().buildIndex;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
 
         gameOverAudioSource = GameOverScreen.GetComponent<AudioSource>();
         gameOverDelay = gameOverAudioSource.clip.length;
@@ -68,6 +70,8 @@ public class UIHandler : MonoBehaviour
         GameOverScreen.SetActive(true);
         tails.SetActive(false);
         fire.SetActive(false);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         StartCoroutine(MusicDelay(gameOverDelay));
     }
 
@@ -76,6 +80,8 @@ public class UIHandler : MonoBehaviour
         WinScreen.SetActive(true);
         tails.SetActive(false);
         fire.SetActive(false);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         StartCoroutine(MusicDelay(winDelay));
     }
 
