@@ -14,7 +14,7 @@ public class UIHandler : MonoBehaviour
 
     private AudioSource newLevelSound;
     private AudioSource gameOverAudioSource;
-    private AudioSource winAudioSource;
+
 
     private Animator gameOverAnimator;
     private Animator winAnimator;
@@ -44,7 +44,6 @@ public class UIHandler : MonoBehaviour
         gameOverAnimator = GameOverScreen.GetComponent<Animator>();
         buttonsGameOver = GameOverScreen.transform.GetChild(GameOverScreen.transform.childCount - 1).gameObject;
 
-        winAudioSource = WinScreen.GetComponent<AudioSource>();
         winAnimator = WinScreen.GetComponent<Animator>();
         buttonsWin = WinScreen.transform.GetChild(WinScreen.transform.childCount - 1).gameObject;
     }
