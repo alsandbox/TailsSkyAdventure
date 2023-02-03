@@ -4,18 +4,17 @@ using UnityEngine.Events;
 public class PlayerController : MonoBehaviour
 {
     public static bool IsGameOver { get; set; }
-    protected int passedShips = 5;
-    protected static int lives = 3;
+    private int passedShips = 5;
+    private int lives = 3;
 
-    public UnityEvent DecreaseLifeEvent;
+    [SerializeField] private AudioSource missedEnemy;
 
-    public AudioSource missedEnemy;
+    [SerializeField] private UnityEvent DecreaseLifeEvent;
+    [SerializeField] private UnityEvent GameOverEvent;
 
-    public UnityEvent GameOverScreen;
-
-    public void PlayerMissesEnemy() //called from the EnemyController
+    public void PlayerMissesEnemy() 
     {
-        if (lives > 0 & passedShips > 0 & !IsEnemyColliding.IsCollided)
+        if (lives > 0 & passedShips > 0 & !PlayerDamage.IsCollided)
         {
             missedEnemy.Play();
             passedShips--;
@@ -31,11 +30,11 @@ public class PlayerController : MonoBehaviour
         if (lives == 0)
         {
             IsGameOver = true;
-            GameOverScreen.Invoke();
+            GameOverEvent?.Invoke();
         }
     }
 
-    protected void EnemyHitsPlayer()
+    public void EnemyHitsPlayer()
     {
         if (lives > 0)
         {
@@ -46,7 +45,7 @@ public class PlayerController : MonoBehaviour
         if (lives == 0)
         {
             IsGameOver = true;
-            GameOverScreen.Invoke();
+            GameOverEvent?.Invoke();
         }
     }
 }

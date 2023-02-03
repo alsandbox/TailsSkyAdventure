@@ -26,7 +26,7 @@ public class PlayerActing : MonoBehaviour
 
     void Update()
     {
-        if (!IsGameOver)
+        if (!PlayerController.IsGameOver & !UIHandler.isPaused)
         {
             PlayerMove();
             PlayerShoot();
