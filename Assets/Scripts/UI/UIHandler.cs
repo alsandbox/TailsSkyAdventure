@@ -9,12 +9,12 @@ public class UIHandler : MonoBehaviour
     public GameObject lifeUI;
     public GameObject flagsUI;
 
-    private int livesCounter = 0;
-    private int flagsCounter = 0;
+    private int livesCounter;
+    private int flagsCounter;
+    private int sceneID;
 
     private AudioSource newLevelSound;
     private AudioSource gameOverAudioSource;
-
 
     private Animator gameOverAnimator;
     private Animator winAnimator;
@@ -22,6 +22,7 @@ public class UIHandler : MonoBehaviour
     private float gameOverDelay;
     private float winDelay = 5f;
 
+    public GameObject PauseScreen;
     public GameObject GameOverScreen;
     public GameObject WinScreen;
 
@@ -31,14 +32,17 @@ public class UIHandler : MonoBehaviour
     private GameObject buttonsGameOver;
     private GameObject buttonsWin;
 
-    private int sceneID;
+    public GameStates gameStates;
+
+    private void Awake()
+    {
+        HideCursor();
+    }
 
     private void Start()
     {
         sceneID = SceneManager.GetActiveScene().buildIndex;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-
+ 
         gameOverAudioSource = GameOverScreen.GetComponent<AudioSource>();
         gameOverDelay = gameOverAudioSource.clip.length;
         gameOverAnimator = GameOverScreen.GetComponent<Animator>();
@@ -46,6 +50,21 @@ public class UIHandler : MonoBehaviour
 
         winAnimator = WinScreen.GetComponent<Animator>();
         buttonsWin = WinScreen.transform.GetChild(WinScreen.transform.childCount - 1).gameObject;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) & !gameStates.IsGameOver)
+        {
+            if (!gameStates.IsPaused)
+            {
+                PauseGame();
+            }
+            else
+            {
+                ResumeGame();
+            }
+        }
     }
 
     public void DecreaseLife()
@@ -64,13 +83,26 @@ public class UIHandler : MonoBehaviour
         flagsCounter++;
     }
 
+    private void PauseGame()
+    {
+        gameStates.IsPaused = true;
+        PauseScreen.SetActive(true);
+        ShowCursor();
+    }
+
+    public void ResumeGame()
+    {
+        gameStates.IsPaused = false;
+        PauseScreen.SetActive(false);
+        HideCursor();
+    }
+
     public void GameOver()
     {
         GameOverScreen.SetActive(true);
         tails.SetActive(false);
         fire.SetActive(false);
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        ShowCursor();
         StartCoroutine(MusicDelay(gameOverDelay));
     }
 
@@ -79,14 +111,13 @@ public class UIHandler : MonoBehaviour
         WinScreen.SetActive(true);
         tails.SetActive(false);
         fire.SetActive(false);
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        ShowCursor();
         StartCoroutine(MusicDelay(winDelay));
     }
 
-    public void Restart()
+    public void RestartGame()
     {
-        PlayerController.IsGameOver = false;
+        gameStates.IsGameOver = false;
         SceneManager.LoadScene(sceneID);
     }
 
@@ -99,6 +130,18 @@ public class UIHandler : MonoBehaviour
         #else
                 Application.Quit();
         #endif
+    }
+
+    private void HideCursor()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void ShowCursor()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     IEnumerator MusicDelay(float clipLength)
