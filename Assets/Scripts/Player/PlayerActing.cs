@@ -18,6 +18,8 @@ public class PlayerActing : MonoBehaviour
 
     public AudioSource fireSound;
 
+    public GameStates gameStates;
+
     void Start()
     {
         tailsCenter.SetActive(true);
@@ -26,7 +28,7 @@ public class PlayerActing : MonoBehaviour
 
     void Update()
     {
-        if (!PlayerController.IsGameOver & !UIHandler.isPaused)
+        if (!gameStates.IsGameOver & !gameStates.IsPaused)
         {
             PlayerMove();
             PlayerShoot();
@@ -91,7 +93,7 @@ public class PlayerActing : MonoBehaviour
         yield return new WaitForSeconds(fireRepeatRate);
         tailsFireFirstLine[fireNumber].SetActive(false);
 
-        if (!enemyController.IsDestroyed)
+        if (!gameStates.EnemyIsDestroyed)
         {
             tailsFireSecondLine[fireNumber].SetActive(true);
             yield return new WaitForSeconds(fireRepeatRate);
@@ -102,7 +104,7 @@ public class PlayerActing : MonoBehaviour
             yield break;
         }
 
-        if (!enemyController.IsDestroyed)
+        if (!gameStates.EnemyIsDestroyed)
         {
             tailsFireThirdLine[fireNumber].SetActive(true);
             yield return new WaitForSeconds(fireRepeatRate);

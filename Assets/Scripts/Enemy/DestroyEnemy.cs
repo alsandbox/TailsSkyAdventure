@@ -17,6 +17,7 @@ public class DestroyEnemy : MonoBehaviour
     private AudioSource destroyEnemySound;
 
     public EnemyController enemyController;
+    public GameStates gameStates;
 
     private void Start()
     {
@@ -30,7 +31,7 @@ public class DestroyEnemy : MonoBehaviour
     {
         destroyEnemySound.Play();
         blink.SetTrigger("getsHit");
-        enemyController.IsDestroyed = true;
+        gameStates.EnemyIsDestroyed = true;
 
         enemiesCounter++;
 
@@ -40,7 +41,7 @@ public class DestroyEnemy : MonoBehaviour
         }
         else if (enemiesCounter == numberOfLevels * enemiesNextLevel)
         {
-            PlayerController.IsGameOver = true;
+            gameStates.IsGameOver = true;
             WinScreenEvent?.Invoke();
         }
     }

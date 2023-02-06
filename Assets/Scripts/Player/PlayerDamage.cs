@@ -6,7 +6,7 @@ public class PlayerDamage : MonoBehaviour
     private Animator blink;
     private AudioSource playersDamageSound;
     public UnityEvent EnemyHitsPlayer;
-    public static bool IsCollided { get; set; }
+    public GameStates gameStates;
 
     private void Start()
     {
@@ -16,12 +16,12 @@ public class PlayerDamage : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D player)
     {
-        IsCollided = true;
+        gameStates.PlayerTsCollided = true;
         blink.SetTrigger("getsHit");
         playersDamageSound.Play();
         EnemyHitsPlayer?.Invoke();
 
-        if (PlayerController.IsGameOver)
+        if (gameStates.IsGameOver)
         {
             this.gameObject.SetActive(false);
         }
@@ -29,6 +29,6 @@ public class PlayerDamage : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D player)
     {
-        IsCollided = false;
+        gameStates.PlayerTsCollided = false;
     }
 }

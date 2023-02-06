@@ -3,7 +3,6 @@ using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
-    public static bool IsGameOver { get; set; }
     private int passedShips = 5;
     private int lives = 3;
 
@@ -12,9 +11,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private UnityEvent DecreaseLifeEvent;
     [SerializeField] private UnityEvent GameOverEvent;
 
+    public GameStates gameStates;
+
     public void PlayerMissesEnemy() 
     {
-        if (lives > 0 & passedShips > 0 & !PlayerDamage.IsCollided)
+        if (lives > 0 & passedShips > 0 & !gameStates.PlayerTsCollided)
         {
             missedEnemy.Play();
             passedShips--;
@@ -29,7 +30,7 @@ public class PlayerController : MonoBehaviour
 
         if (lives == 0)
         {
-            IsGameOver = true;
+            gameStates.IsGameOver = true;
             GameOverEvent?.Invoke();
         }
     }
@@ -44,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
         if (lives == 0)
         {
-            IsGameOver = true;
+            gameStates.IsGameOver = true;
             GameOverEvent?.Invoke();
         }
     }
