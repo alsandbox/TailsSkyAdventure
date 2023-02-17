@@ -5,7 +5,7 @@ public class DestroyEnemy : MonoBehaviour
 {
     private readonly int enemiesNextLevel = 15;
     private readonly int numberOfLevels = 4;
-    private static int enemiesCounter = 0;
+    private static int enemiesCounter;
 
     private Animator blink;
 
