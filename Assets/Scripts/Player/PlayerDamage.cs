@@ -16,7 +16,7 @@ public class PlayerDamage : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D player)
     {
-        gameStates.PlayerTsCollided = true;
+        gameStates.PlayerIsCollided = true;
         blink.SetTrigger("getsHit");
         playersDamageSound.Play();
         EnemyHitsPlayer?.Invoke();
@@ -29,6 +29,6 @@ public class PlayerDamage : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D player)
     {
-        gameStates.PlayerTsCollided = false;
+        gameStates.PlayerIsCollided = false;
     }
 }

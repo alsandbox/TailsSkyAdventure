@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerMissesEnemy() 
     {
-        if (lives > 0 & passedShips > 0 & !gameStates.PlayerTsCollided)
+        if (lives > 0 & passedShips > 0 & !gameStates.PlayerIsCollided)
         {
             missedEnemy.Play();
             passedShips--;
