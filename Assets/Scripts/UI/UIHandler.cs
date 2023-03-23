@@ -6,160 +6,46 @@ using UnityEngine.SceneManagement;
 
 public class UIHandler : MonoBehaviour
 {
-    public GameObject lifeUI;
-    public GameObject flagsUI;
+    protected int sceneID;
+    [SerializeField] protected Animator transitionAnimator;
+    protected readonly float transitionDelayTime = 0.3f;
+    private readonly float exitDelayTime = 0.2f;
 
-    private int livesCounter;
-    private int flagsCounter;
-    private int sceneID;
-
-    private AudioSource newLevelSound;
-    private AudioSource gameOverAudioSource;
-
-    private Animator gameOverAnimator;
-    private Animator winAnimator;
-
-    private float gameOverDelay;
-    private float winDelay = 5f;
-
-    public GameObject PauseScreen;
-    public GameObject GameOverScreen;
-    public GameObject WinScreen;
-
-    public GameObject tails;
-    public GameObject fire;
-
-    private GameObject buttonsGameOver;
-    private GameObject buttonsWin;
-
-    public GameStates gameStates;
-
-    private void Awake()
+    protected virtual void Update()
     {
-        HideCursor();
-    }
-
-    private void Start()
-    {
-        sceneID = SceneManager.GetActiveScene().buildIndex;
- 
-        gameOverAudioSource = GameOverScreen.GetComponent<AudioSource>();
-        gameOverDelay = gameOverAudioSource.clip.length;
-        gameOverAnimator = GameOverScreen.GetComponent<Animator>();
-        buttonsGameOver = GameOverScreen.transform.GetChild(GameOverScreen.transform.childCount - 1).gameObject;
-
-        winAnimator = WinScreen.GetComponent<Animator>();
-        buttonsWin = WinScreen.transform.GetChild(WinScreen.transform.childCount - 1).gameObject;
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape) & !gameStates.IsGameOver)
+        if (Input.GetMouseButton(0) | Input.GetMouseButton(1) | Input.GetMouseButton(2))
         {
-            if (!gameStates.IsPaused)
-            {
-                PauseGame();
-            }
-            else
-            {
-                ResumeGame();
-            }
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 
-    public void DecreaseLife()
-    {
-        GameObject currentLifeUI = lifeUI.transform.GetChild(livesCounter).gameObject;
-        currentLifeUI.SetActive(false);
-        livesCounter++;
-    }
-
-    public void ToNewLevel()
-    {
-        GameObject currentFlagUI = flagsUI.transform.GetChild(flagsCounter).gameObject;
-        currentFlagUI.SetActive(true);
-        newLevelSound = flagsUI.GetComponent<AudioSource>();
-        newLevelSound.Play();
-        flagsCounter++;
-    }
-
-    private void PauseGame()
-    {
-        gameStates.IsPaused = true;
-        PauseScreen.SetActive(true);
-        ShowCursor();
-    }
-
-    public void ResumeGame()
-    {
-        gameStates.IsPaused = false;
-        PauseScreen.SetActive(false);
-        HideCursor();
-    }
-
-    public void GameOver()
-    {
-        GameOverScreen.SetActive(true);
-        tails.SetActive(false);
-        fire.SetActive(false);
-        ShowCursor();
-        StartCoroutine(MusicDelay(gameOverDelay));
-    }
-
-    public void Win()
-    {
-        WinScreen.SetActive(true);
-        tails.SetActive(false);
-        fire.SetActive(false);
-        ShowCursor();
-        StartCoroutine(MusicDelay(winDelay));
-    }
-
-    public void RestartGame()
-    {
-        gameStates.IsGameOver = false;
-        SceneManager.LoadScene(sceneID);
-    }
-
-    public void Exit()
-    {
-        #if UNITY_EDITOR
-                EditorApplication.ExitPlaymode();
-        #elif (UNITY_WEBGL)
-                Application.OpenURL("about:blank");
-        #else
-                Application.Quit();
-        #endif
-    }
-
-    private void HideCursor()
+    protected void HideCursor()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void ShowCursor()
+    protected void ShowCursor()
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
 
-    IEnumerator MusicDelay(float clipLength)
+    public void Exit()
     {
-        if (GameOverScreen.activeSelf)
-        {
-            yield return new WaitForSeconds(clipLength / 2);
-            buttonsGameOver.SetActive(true);
+        StartCoroutine(ExitAfterDelay());
+    }
 
-            yield return new WaitForSeconds(clipLength / 2);
-            gameOverAnimator.enabled = false;
-        }
-
-        if (WinScreen.activeSelf)
-        {
-            yield return new WaitForSeconds(clipLength);
-            winAnimator.enabled = false;
-            buttonsWin.SetActive(true);
-        }
+    IEnumerator ExitAfterDelay()
+    {
+        yield return new WaitForSeconds(exitDelayTime);
+        #if UNITY_EDITOR
+            EditorApplication.ExitPlaymode();
+        #elif (UNITY_WEBGL)
+            Application.OpenURL("about:blank");
+        #else
+            Application.Quit();
+        #endif
     }
 }
