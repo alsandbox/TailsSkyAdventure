@@ -1,15 +1,9 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ButtonStates : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerEnterHandler, IPointerExitHandler
+public class ButtonStates : MonoBehaviour
 {
-    private GameObject highlight;
     private bool firstSelectedNone = true;
-
-    private void Awake()
-    {
-        highlight = transform.GetChild(1).gameObject;
-    }
 
     private void Update()
     {
@@ -28,25 +22,5 @@ public class ButtonStates : MonoBehaviour, ISelectHandler, IDeselectHandler, IPo
         {
             EventSystem.current.SetSelectedGameObject(this.gameObject);
         }
-    }
-
-    public void OnSelect(BaseEventData eventData)
-    {
-        highlight.SetActive(true);
-    }
-
-    public void OnDeselect(BaseEventData data)
-    {
-        highlight.SetActive(false);
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        highlight.SetActive(true);
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        highlight.SetActive(false);
     }
 }
