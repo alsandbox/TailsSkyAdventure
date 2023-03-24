@@ -13,7 +13,7 @@ public class PlayerActing : MonoBehaviour
     public GameObject[] tailsFireSecondLine;
     public GameObject[] tailsFireThirdLine;
 
-    private readonly float fireRepeatRate = 0.2f;
+    private readonly float fireRepeatRate = 0.4f;
     public EnemyController enemyController;
 
     public AudioSource fireSound;
@@ -89,9 +89,16 @@ public class PlayerActing : MonoBehaviour
 
     IEnumerator SlowFire(int fireNumber)
     {
-        tailsFireFirstLine[fireNumber].SetActive(true);
-        yield return new WaitForSeconds(fireRepeatRate);
-        tailsFireFirstLine[fireNumber].SetActive(false);
+        if (!gameStates.EnemyIsDestroyed)
+        {
+            tailsFireFirstLine[fireNumber].SetActive(true);
+            yield return new WaitForSeconds(fireRepeatRate);
+            tailsFireFirstLine[fireNumber].SetActive(false);
+        }
+        else
+        {
+            yield break;
+        }
 
         if (!gameStates.EnemyIsDestroyed)
         {
