@@ -158,6 +158,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   enemyController: {fileID: 0}
+  gameStates: {fileID: 0}
 --- !u!50 &5104995963553073552
 Rigidbody2D:
   serializedVersion: 4

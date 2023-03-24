@@ -179,6 +179,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   enemyController: {fileID: 0}
+  gameStates: {fileID: 0}
 --- !u!95 &3219068802182301105
 Animator:
   serializedVersion: 4
