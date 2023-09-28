@@ -1,1 +1,41 @@
 # Tails-Sky-Adventure
+
+------
+## Project Overview
+I recreated a handheld LCD game called "Tails' Sky Adventure," which was originally released as a McDonald's Happy Meal giveaway toy for a limited time in 2005. As a personal childhood favorite, I've always wanted to bring back this game, so I took it upon myself to recreate it.
+
+------
+## About the Game
+If you're not familiar with "Tails' Sky Adventure", you can find more information here. To give you a quick idea of the gameplay, here's a summary:
+* Turn the game on/off using the switch on the back.
+* Start the game by pressing any button.
+* Move left and right to position your ship in front of enemy ships.
+* Press the button to shoot down enemy ships.
+* Advance to the next level after eliminating fifteen enemy ships.
+* If you collide with an enemy ship or let five ships pass you in a level, you lose a play.
+* If you lose all your plays, the game is over.
+* After completing all levels, you win the game, accompanied by celebratory character animations and sounds.
+* To play again, simply press any button.
+
+------
+## Technical Details
+Here's a breakdown of the technical aspects of the game:
+
+* Emulating Low Frame Rate: Recreating the game's low frame rate was both challenging and fascinating. LCD games use a sequential activation and deactivation of screen segments for animation, and I replicated this effect.
+
+* Coroutines for Player Action and Enemy Movement: The illusion of enemy movement and firing is achieved through the use of coroutines. Thanks to this game I really learned how to use them.
+
+* Scriptable Object for Game States: To maintain clean and organized code, I utilized Scriptable Objects to store game states in properties. This separation of data from behavior adheres to the Single Responsibility Principle (SRP) in OOP.
+
+* Animations: I added simple animations for various aspects of the game, including menus, screen transitions, and and the enemy's behavior when he's hit.
+
+* Menu: Implemented a convenient menu that displays the keys used in the game and provides a restart option. This replaces the need to manually switch the game state (physical keys).
+------
+## Tools and Technologies
+##### Development Tools
+* Unity game engine (version 2021.3.7f1)
+* Visual Studio 2022
+* Audacity and Adobe Premiere Pro 2020 to clean up noise in audio files
+* Adobe Photoshop CC 2019 to create sprites from SVG file
+
+##### Graphics and Art
