@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using System.Runtime.InteropServices;
 
 public class UIHandler : MonoBehaviour
 {
@@ -10,6 +9,9 @@ public class UIHandler : MonoBehaviour
     [SerializeField] protected Animator transitionAnimator;
     protected readonly float transitionDelayTime = 0.3f;
     private readonly float exitDelayTime = 0.2f;
+
+    [DllImport("__Internal")]
+    private static extern void CloseCurrentWindow();
 
     protected virtual void Update()
     {
@@ -42,10 +44,10 @@ public class UIHandler : MonoBehaviour
         yield return new WaitForSeconds(exitDelayTime);
         #if UNITY_EDITOR
             EditorApplication.ExitPlaymode();
-        #elif (UNITY_WEBGL)
-            Application.OpenURL("about:blank");
-        #else
+#elif (UNITY_WEBGL)
+            CloseCurrentWindow();
+#else
             Application.Quit();
-        #endif
+#endif
     }
 }
