@@ -48,7 +48,7 @@ Here's a breakdown of the technical aspects of the game:
 * Adobe Photoshop CC 2019 to create sprites from SVG file
 
 ##### Graphics and Art
-* Sounds and SVG files (enemy, Tails, fire) are from the amazing project «[Sonic McOrigins](https://tvc-16.science/mcorigins.html)» by Difegue. This is a simulator engine for reproducing LCD games made by McDonald's in the 2000s. [Here](https://github.com/Difegue/LCDonald) is the project's source code.
+* Sounds and SVG files (enemy, Tails, fire) are from the amazing project [«Sonic McOrigins»](https://tvc-16.science/mcorigins.html) by Difegue. This is a simulator engine for reproducing LCD games made by McDonald's in the 2000s. [Here](https://github.com/Difegue/LCDonald) is the project's source code.
 * The background was repainted by artist [Sergei Knish](https://www.artstation.com/sergeiknish)
 
 ------
