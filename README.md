@@ -58,12 +58,12 @@ public class GameStates : ScriptableObject
 * Adobe Photoshop CC 2019 to create sprites from SVG file
 
 ##### Graphics and Art
-* Sounds and SVG files (enemy, Tails, fire) are from the amazing project [«Sonic McOrigins»](https://tvc-16.science/mcorigins.html) by Difegue. This is a simulator engine for reproducing LCD games made by McDonald's in the 2000s. [Here](https://github.com/Difegue/LCDonald) is the project's source code.
-* The background was repainted by artist [Sergei Knish](https://www.artstation.com/sergeiknish)
+* Sounds and SVG files (enemy, Tails, fire) are from the amazing project [«Sonic McOrigins»](https://tvc-16.science/mcorigins.html) by [@Difegue](https://www.github.com/Difegue). This is a simulator engine for reproducing LCD games made by McDonald's in the 2000s. [Here](https://github.com/Difegue/LCDonald) is the project's source code.
+* The background was repainted by artist [Sergei Knish](https://www.artstation.com/sergeiknish).
 
 ------
 ## Gifs
-Similar (but better quality) videos can be downloaded and viewed ![https://github.com/alsandbox/Tails-Sky-Adventure/tree/readme/ReadmeMedia/Videos](https://github.com/alsandbox/Tails-Sky-Adventure/blob/readme/ReadmeMedia/Gifs/gameplay.gif).
+Similar (but better quality) videos can be downloaded and viewed ![https://github.com/alsandbox/Tails-Sky-Adventure/tree/readme/ReadmeMedia/Videos].
 
 #### Gameplay
 ![](https://github.com/alsandbox/Tails-Sky-Adventure/blob/readme/ReadmeMedia/Gifs/gameplay.gif)
