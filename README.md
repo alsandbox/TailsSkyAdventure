@@ -36,6 +36,16 @@ Here's a breakdown of the technical aspects of the game:
 * **Emulating Low Frame Rate**: Recreating the game's low frame rate was both challenging and fascinating. LCD games use a sequential activation and deactivation of screen segments for animation, and I replicated this effect.
 * **Coroutines for Player Action and Enemy Movement**: The illusion of enemy movement and firing is achieved through the use of coroutines. Thanks to this game I really learned how to use them.
 * **Scriptable Object for Game States**: To maintain clean and organized code, I utilized Scriptable Objects to store game states in properties. This separation of data from behavior adheres to the Single Responsibility Principle (SRP) in OOP.
+```csharp
+[CreateAssetMenu(menuName = "My Assets/GameStates", fileName = "GameStates")]
+public class GameStates : ScriptableObject
+{
+    public bool IsPaused { get; set; }
+    public bool IsGameOver { get; set; }
+    public bool EnemyIsDestroyed { get; set; }
+    public bool PlayerIsCollided { get; set; }
+}
+```
 * **Animations**: I added simple animations for various aspects of the game, including menus, screen transitions, and the enemy's behavior when he's hit.
 * **Menu**: Implemented a convenient menu that displays the keys used in the game and provides a restart option. This replaces the need to manually switch the game state (physical keys).
 
@@ -53,3 +63,25 @@ Here's a breakdown of the technical aspects of the game:
 
 ------
 ## Gifs
+Similar (but better quality) videos can be downloaded and viewed ![https://github.com/alsandbox/Tails-Sky-Adventure/tree/readme/ReadmeMedia/Videos](https://github.com/alsandbox/Tails-Sky-Adventure/blob/readme/ReadmeMedia/Gifs/gameplay.gif).
+
+#### Gameplay
+![](https://github.com/alsandbox/Tails-Sky-Adventure/blob/readme/ReadmeMedia/Gifs/gameplay.gif)
+
+
+#### You can use either the mouse or the keyboard to navigate through the menus.
+![](https://github.com/alsandbox/Tails-Sky-Adventure/blob/readme/ReadmeMedia/Gifs/mouse-keyboards.gif)
+
+
+#### Pause screen
+![](https://github.com/alsandbox/Tails-Sky-Adventure/blob/readme/ReadmeMedia/Gifs/pause-screen.gif)
+
+
+#### Win screen
+![](https://github.com/alsandbox/Tails-Sky-Adventure/blob/readme/ReadmeMedia/Gifs/win-screen.gif)
+
+
+#### Game over screen
+![](https://github.com/alsandbox/Tails-Sky-Adventure/blob/readme/ReadmeMedia/Gifs/gameover-screen.gif)
+
+
