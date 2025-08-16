@@ -1,5 +1,3 @@
-# Tails-Sky-Adventure
-
 ## Table of Contents
 * [Builds](#builds)
 * [Project Overview](#project-overview)
